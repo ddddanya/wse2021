@@ -12,7 +12,10 @@ const login = async (req, res, next) => {
             return res.status(401).send({
                 error: {
                     code: 401,
-                    message: 'Unauthorized'
+                    message: 'Unauthorized',
+                    errors: {
+                        login: "invalid credentials"
+                    }
                 }
             });
         }

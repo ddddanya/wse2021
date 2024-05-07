@@ -31,7 +31,7 @@ const createGroup = async (req, res) => {
         // insert to MySQL
         const insert = await call('INSERT INTO groups (name) VALUES (?)', [name]);
 
-        res.send({
+        res.status(201).send({
             data: {
                 id: insert.insertId,
                 name

@@ -6,7 +6,7 @@ const createControlPoint = async (req, res) => {
         // call MySQL
         const insert = await call('INSERT INTO points (name, parent) VALUES (?, ?)', [name, parent]);
 
-        res.send({
+        res.status(201).send({
             data: {
                 id: insert.insertId,
                 name,
@@ -38,7 +38,6 @@ const getPoints = async (req, res) => {
                     return {
                         id: point.id,
                         name: point.name,
-                        parent: point.parent,
                         points: children.length > 0 ? children : []
                     }
                 });

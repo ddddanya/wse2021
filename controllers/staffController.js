@@ -40,7 +40,7 @@ const createStaff = async (req, res) => {
         // insert to MySQL
         const insert = await call('INSERT INTO staff (full_name, code, photo) VALUES (?, ?, ?)', [full_name, code, photo.name]);
 
-        res.send({
+        res.status(201).send({
             data: {
                 id: insert.insertId,
                 full_name,
@@ -58,7 +58,22 @@ const createStaff = async (req, res) => {
     }
 }
 
+const giveAccess = async (req, res) => {
+    try {
+        const { point_id, time } = req.body;
+        const staff_id = req.params.id;
+
+        // insert
+        await call('INSERT INTO staff_accesses (staff_id, point_id, time) VALUES (?, ?, ?)', [staff_id, point_id, time]);
+
+        res.status(201).send()
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 module.exports = {
     getStaff,
-    createStaff
+    createStaff,
+    giveAccess
 }
